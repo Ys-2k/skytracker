@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head') -%>
+  <body>
+    <%- include('../partials/navbar'); %>
+
+    <div class="container mt-10">
+      <h1 class="text-center mb-4">Flight Status</h1>
+      <%- include('../partials/flash') -%>
+
+      <div class="row">
+        <% data.forEach(flight => { %>
+        <div class="col-md-6 col-lg-4">
+          <div class="card flight-card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= flight.flight.number ?? 'N/A' %> - <%= flight.airline.name
+                ?? 'Unknown Airline' %>
+              </h5>
+              <p class="card-text">
+                Status: <%= flight.flight_status ?? 'Unknown' %>
+              </p>
+
+              <p>
+                <strong>Departure:</strong> <%= flight.departure?.airport ??
+                'Unknown' %> - <%= flight.departure?.terminal ?? 'N/A' %>, Gate
+                <%= flight.departure?.gate ?? 'N/A' %>
+              </p>
+
+              <p>
+                <strong>Scheduled:</strong>
+                <%= flight.departure?.scheduled ? new
+                Date(flight.departure.scheduled).toLocaleString('en-GB', {
+                timeZone: flight.departure.timezone ?? 'Europe/London' }) :
+                'N/A' %>
+              </p>
+
+              <p>
+                <strong>Arrival:</strong> <%= flight.arrival?.airport ??
+                'Unknown' %> - <%= flight.arrival?.terminal ?? 'N/A' %>
+              </p>
+
+              <p>
+                <strong>Scheduled:</strong>
+                <%= flight.arrival?.scheduled ? new
+                Date(flight.arrival.scheduled).toLocaleString('en-GB', {
+                timeZone: flight.arrival.timezone ?? 'America/New_York' }) :
+                'N/A' %>
+              </p>
+
+              <p>
+                <strong>Aircraft:</strong> <%= flight.aircraft?.registration ??
+                'N/A' %> (<%= flight.aircraft?.iata ?? 'Unknown Model' %>)
+              </p>
+              <p>
+                <strong>Current Status:</strong> <%= flight.live?.is_ground ?
+                'On the Ground' : 'In the Air' %>
+              </p>
+
+              <form action="/save-flight" method="POST">
+                <input
+                  type="hidden"
+                  name="flight_id"
+                  value="<%= flight.flight.number + '-' + flight.departure.iata %>"
+                />
+                <input
+                  type="hidden"
+                  name="flight_number"
+                  value="<%= flight.flight.number %>"
+                />
+                <input
+                  type="hidden"
+                  name="dep_iata"
+                  value="<%= flight.departure.iata %>"
+                />
+                <input
+                  type="hidden"
+                  name="arr_iata"
+                  value="<%= flight.arrival.iata %>"
+                />
+                <input
+                  type="hidden"
+                  name="scheduled_departure"
+                  value="<%= flight.departure.scheduled %>"
+                />
+                <input
+                  type="hidden"
+                  name="estimated_departure"
+                  value="<%= flight.departure.estimated %>"
+                />
+                <input
+                  type="hidden"
+                  name="actual_departure"
+                  value="<%= flight.departure.actual %>"
+                />
+                <input
+                  type="hidden"
+                  name="scheduled_arrival"
+                  value="<%= flight.arrival.scheduled %>"
+                />
+                <input
+                  type="hidden"
+                  name="estimated_arrival"
+                  value="<%= flight.arrival.estimated %>"
+                />
+                <input
+                  type="hidden"
+                  name="actual_arrival"
+                  value="<%= flight.arrival.actual %>"
+                />
+                <input
+                  type="hidden"
+                  name="status"
+                  value="<%= flight.flight.status %>"
+                />
+                <input
+                  type="hidden"
+                  name="airline_name"
+                  value="<%= flight.airline.name %>"
+                />
+                <input
+                  type="hidden"
+                  name="airline_iata"
+                  value="<%= flight.airline.iata %>"
+                />
+
+                <button type="submit" class="btn btn-primary">Save</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+  </body>
+</html>

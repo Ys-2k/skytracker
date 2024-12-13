@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head'); %>
+  <body>
+    <div class="min-vh-100 d-flex align-items-center position-relative">
+      <div class="position-absolute w-100 h-100" style="z-index: -1">
+        <img
+          src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05"
+          class="w-100 h-100 object-fit-cover"
+          alt="Background"
+        />
+        <div
+          class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"
+        ></div>
+      </div>
+
+      <div class="container text-center text-white">
+        <h1 class="display-4 fw-bold mb-5">Welcome to SkyTracker</h1>
+        <div class="d-flex justify-content-center gap-3">
+          <a href="/login" class="btn btn-outline-light btn-lg px-5">Login</a>
+          <a href="/register" class="btn btn-primary btn-lg px-5">Register</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

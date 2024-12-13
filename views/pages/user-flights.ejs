@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head') -%>
+  <body>
+    <%- include('../partials/navbar'); %>
+
+    <div class="container mt-10">
+      <h1 class="text-center mb-4">Your Saved Flights</h1>
+      <%- include('../partials/flash') -%>
+
+      <div class="row">
+        <% flights.forEach(flight => { %>
+        <div class="col-md-6 col-lg-4">
+          <div class="card flight-card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= flight.flight_number ?? 'N/A' %> - <%= flight.airline_name
+                ?? 'Unknown Airline' %>
+              </h5>
+              <p class="card-text">Status: <%= flight.status ?? 'Unknown' %></p>
+
+              <p>
+                <strong>Departure:</strong> <%= flight.dep_iata ?? 'Unknown' %>
+                - <%= flight.departure_terminal ?? 'N/A' %>, Gate <%=
+                flight.departure_gate ?? 'N/A' %>
+              </p>
+
+              <p>
+                <strong>Scheduled:</strong>
+                <%= flight.scheduled_departure ? new
+                Date(flight.scheduled_departure).toLocaleString('en-GB', {
+                timeZone: flight.departure_timezone ?? 'Europe/London' }) :
+                'N/A' %>
+              </p>
+
+              <p>
+                <strong>Arrival:</strong> <%= flight.arr_iata ?? 'Unknown' %> -
+                <%= flight.arrival_terminal ?? 'N/A' %>
+              </p>
+
+              <p>
+                <strong>Scheduled:</strong>
+                <%= flight.scheduled_arrival ? new
+                Date(flight.scheduled_arrival).toLocaleString('en-GB', {
+                timeZone: flight.arrival_timezone ?? 'America/New_York' }) :
+                'N/A' %>
+              </p>
+
+              <p>
+                <strong>Aircraft:</strong> <%= flight.aircraft_registration ??
+                'N/A' %> (<%= flight.aircraft_iata ?? 'Unknown Model' %>)
+              </p>
+              <p>
+                <strong>Current Status:</strong>
+                <%= flight.status === 'In the Air' ? 'In Air' : 'On Ground' %>
+              </p>
+
+              <form action="/user/flights" method="post">
+                <input type="hidden" name="id" value="<%= flight.id %>" />
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+  </body>
+</html>

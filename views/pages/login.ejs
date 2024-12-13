@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head') -%>
+  <body>
+    <div class="min-vh-100 d-flex align-items-center position-relative">
+      <div class="position-absolute w-100 h-100" style="z-index: -1">
+        <img
+          src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1"
+          class="w-100 h-100 object-fit-cover"
+          alt="Background"
+        />
+        <div
+          class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"
+        ></div>
+      </div>
+
+      <div class="container">
+        <%- include('../partials/flash') -%>
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg">
+              <div class="card-body p-5">
+                <div class="text-center mb-4">
+                  <h2 class="fw-bold mb-2">Welcome Back</h2>
+                  <p class="text-muted">Please enter your credentials</p>
+                </div>
+
+                <form method="POST" action="/login">
+                  <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input
+                      type="username"
+                      class="form-control form-control-lg"
+                      id="username"
+                      name="username"
+                      placeholder="Enter your username"
+                      required
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input
+                      type="password"
+                      name="password"
+                      class="form-control form-control-lg"
+                      id="password"
+                      placeholder="Enter your password"
+                      required
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    class="btn btn-primary w-100 btn-lg mb-3"
+                  >
+                    Login
+                  </button>
+
+                  <div class="text-center">
+                    <span class="text-muted">Don't have an account?</span>
+                    <a
+                      href="/register"
+                      class="text-primary text-decoration-none ms-1"
+                      >Sign up</a
+                    >
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="text-center mt-4">
+              <a href="/" class="text-white text-decoration-none">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-arrow-left"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                  />
+                </svg>
+                Back to Home
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

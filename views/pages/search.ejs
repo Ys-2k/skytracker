@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head') -%>
+  <body>
+    <%- include('../partials/navbar') -%>
+
+    <div class="container mt-5">
+      <h1 class="text-center">Search Flights by Flight ID</h1>
+
+      <%- include('../partials/flash') -%>
+
+      <form action="/search-results" method="POST" class="mb-4">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            name="flight_id"
+            placeholder="Enter Flight ID"
+            value="<%= query %>"
+            required
+          />
+          <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+      </form>
+
+      <h4 class="mb-3">Search Results:</h4>
+      <div class="row">
+        <% if (results.length > 0) { %> <% results.forEach(flight => { %>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">Flight ID: <%= flight.flight_id %></h5>
+              <p><strong>Airline:</strong> <%= flight.airline_name %></p>
+              <p><strong>Departure:</strong> <%= flight.dep_iata %></p>
+              <p><strong>Arrival:</strong> <%= flight.arr_iata %></p>
+              <p>
+                <strong>Scheduled Departure:</strong>
+                <%= flight.scheduled_departure ? new
+                Date(flight.scheduled_departure).toLocaleString('en-GB') : 'N/A'
+                %>
+              </p>
+              <p><strong>Status:</strong> <%= flight.status %></p>
+            </div>
+          </div>
+        </div>
+        <% }); %> <% } else { %>
+        <p class="text-center">
+          No flights found matching the Flight ID "<%= query %>"
+        </p>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>
