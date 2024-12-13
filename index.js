@@ -8,7 +8,7 @@ const mainRouter = require("./routes/mainRouter");
 const apiRouter = require("./routes/apiRouter");
 
 const app = express();
-const PORT = process.env.SERVER_PORT || 8080;
+const PORT = process.env.SERVER_PORT || 8000;
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
