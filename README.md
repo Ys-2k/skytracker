@@ -4,6 +4,7 @@
 - MySQL Server
 - aviationstack API Key
   ## VM database
+- you must configure the .env file to your chosen username and password  
 - username: flightusr
 - password; test123
   ## On the website
