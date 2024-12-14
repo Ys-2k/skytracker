@@ -5,4 +5,6 @@
 - aviationstack API Key
   ## VM database
 - username: flightusr
-- password; test123 
+- password; test123
+  ## On the website
+- to search for flights you must type in airport terminal codes eg "LHR" to "JFK"
